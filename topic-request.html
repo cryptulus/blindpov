@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Topic - blindpov</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #1a1a1a; color: #e0e0e0; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 5px; background: #333; color: #e0e0e0; border: 1px solid #555; }
+    button { margin-top: 20px; padding: 10px 20px; background: #0066cc; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0055aa; }
+  </style>
+</head>
+<body>
+  <h1>Request a Topic</h1>
+  <p>Suggest a topic for a future blog post. Your suggestion will be sent directly to the blog author.</p>
+  <form action="https://formsubmit.co/greg.osborne.email" method="POST">
+    <input type="hidden" name="_subject" value="New Topic Suggestion for Blind Point of View">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://cryptulus.github.io/blindpov/">
+    
+    <label for="name">Your Name (optional)</label>
+    <input type="text" id="name" name="name">
+    
+    <label for="email">Your Email (optional, so I can follow up)</label>
+    <input type="email" id="email" name="email">
+    
+    <label for="topic">Topic Suggestion *</label>
+    <textarea id="topic" name="topic" rows="5" required></textarea>
+    
+    <button type="submit">Submit Topic Suggestion</button>
+  </form>
+</body>
+</html>
