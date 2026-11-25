@@ -162,7 +162,6 @@ nav a:hover, nav a:focus {
 }
 
 /* Single post */
-.post h1 {
   font-size: 2em;
   color: var(--heading);
   margin-bottom: 10px;
@@ -241,29 +240,6 @@ nav a:hover, nav a:focus {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-}
-
-.post .post-tags {
-  margin-top: 30px;
-  padding-top: 15px;
-  border-top: 1px solid var(--border);
-}
-
-.post .post-tags a {
-  display: inline-block;
-  background: var(--border);
-  color: var(--text-muted);
-  padding: 3px 10px;
-  border-radius: 15px;
-  font-size: 0.85em;
-  margin-right: 5px;
-  margin-top: 5px;
-}
-
-.post .post-tags a:hover,
-.post .post-tags a:focus {
-  background: var(--accent-dark);
-  color: var(--heading);
 }
 
 .post .back-link {
