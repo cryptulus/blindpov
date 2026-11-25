@@ -49,20 +49,6 @@
       <p>Help shape the blog — suggest a topic and I'll consider it for a future post.</p>
       <a href="topic-request.html">Request a Topic</a>
     </section>
-  
-    <section class="reactions">
-      <h2>How did you like this post?</h2>
-      <div class="reaction-buttons">
-        <button class="reaction-btn" data-reaction="like" onclick="react('like')">👍 Like</button>
-        <button class="reaction-btn" data-reaction="dislike" onclick="react('dislike')">👎 Dislike</button>
-        <button class="reaction-btn" data-reaction="love" onclick="react('love')">❤️ Love</button>
-      </div>
-      <div class="reaction-counts" id="reactionCounts">
-        <span id="likeCount">0</span> liked · 
-        <span id="dislikeCount">0</span> disliked · 
-        <span id="loveCount">0</span> loved
-      </div>
-    </section>
     
     <script>
       const postId = window.location.pathname.split('/').pop();
@@ -85,21 +71,6 @@
       const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
       updateCounts(saved);
     </script>
-    
-  
-    <section class="reactions">
-      <h2>Did you like this article?</h2>
-      <p>Click <strong>Like</strong> if you enjoyed it. Click <strong>Dislike</strong> if you disagree or didn't like it.</p>
-      <div class="reaction-buttons">
-        <button class="reaction-btn like-btn" onclick="vote('like')">👍 Like</button>
-        <button class="reaction-btn dislike-btn" onclick="vote('dislike')">👎 Dislike</button>
-      </div>
-      <div class="reaction-counts" id="reactionCounts">
-        <span id="likeCount">Loading...</span> likes · 
-        <span id="dislikeCount">Loading...</span> dislikes
-      </div>
-      <p id="voteStatus" style="color: #999; font-size: 14px;"></p>
-    </section>
     
     <script>
       const postId = window.location.pathname.split('/').pop();
@@ -149,5 +120,21 @@
   <footer>
     <p>&copy; 2026 Greg Osborne / blindpov. All rights reserved.</p>
   </footer>
+
+<script src="https://giscus.app/client.js"
+        data-repo="cryptulus/blindpov"
+        data-repo-id="R_kgDOV78xzw"
+        data-category="General"
+        data-category-id="DC_kwDOV78xzw4Cg8kH"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
 </body>
 </html>
