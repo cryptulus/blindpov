@@ -86,6 +86,64 @@
       updateCounts(saved);
     </script>
     
+  
+    <section class="reactions">
+      <h2>Did you like this article?</h2>
+      <p>Click <strong>Like</strong> if you enjoyed it. Click <strong>Dislike</strong> if you disagree or didn't like it.</p>
+      <div class="reaction-buttons">
+        <button class="reaction-btn like-btn" onclick="vote('like')">👍 Like</button>
+        <button class="reaction-btn dislike-btn" onclick="vote('dislike')">👎 Dislike</button>
+      </div>
+      <div class="reaction-counts" id="reactionCounts">
+        <span id="likeCount">Loading...</span> likes · 
+        <span id="dislikeCount">Loading...</span> dislikes
+      </div>
+      <p id="voteStatus" style="color: #999; font-size: 14px;"></p>
+    </section>
+    
+    <script>
+      const postId = window.location.pathname.split('/').pop();
+      const voteKey = 'blindpov_vote_' + postId;
+      
+      // Load counts and check if user has voted
+      function loadCounts() {
+        fetch('https://countapi.xyz/get/blindpov/' + postId + '_likes')
+          .then(r => r.json())
+          .then(data => document.getElementById('likeCount').textContent = data.value)
+          .catch(() => document.getElementById('likeCount').textContent = '0');
+        
+        fetch('https://countapi.xyz/get/blindpov/' + postId + '_dislikes')
+          .then(r => r.json())
+          .then(data => document.getElementById('dislikeCount').textContent = data.value)
+          .catch(() => document.getElementById('dislikeCount').textContent = '0');
+        
+        const hasVoted = localStorage.getItem(voteKey);
+        if (hasVoted) {
+          document.getElementById('voteStatus').textContent = 'You have already voted (' + hasVoted + '). Click again to change your vote.';
+        }
+      }
+      
+      function vote(type) {
+        const hasVoted = localStorage.getItem(voteKey);
+        
+        // If user voted before, remove their previous vote
+        if (hasVoted) {
+          fetch('https://countapi.xyz/hit/blindpov/' + postId + '_' + hasVoted + '/1')
+            .then(() => localStorage.removeItem(voteKey));
+        }
+        
+        // Add new vote
+        fetch('https://countapi.xyz/hit/blindpov/' + postId + '_' + type + '/1')
+          .then(() => {
+            localStorage.setItem(voteKey, type);
+            document.getElementById('voteStatus').textContent = 'Thanks for your vote!';
+            loadCounts();
+          });
+      }
+      
+      loadCounts();
+    </script>
+    
   </main>
 
   <footer>
