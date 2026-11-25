@@ -70,6 +70,43 @@
       <p>Help shape the blog — suggest a topic and I'll consider it for a future post.</p>
       <a href="topic-request.html">Request a Topic</a>
     </section>
+  
+    <section class="reactions">
+      <h2>How did you like this post?</h2>
+      <div class="reaction-buttons">
+        <button class="reaction-btn" data-reaction="like" onclick="react('like')">👍 Like</button>
+        <button class="reaction-btn" data-reaction="dislike" onclick="react('dislike')">👎 Dislike</button>
+        <button class="reaction-btn" data-reaction="love" onclick="react('love')">❤️ Love</button>
+      </div>
+      <div class="reaction-counts" id="reactionCounts">
+        <span id="likeCount">0</span> liked · 
+        <span id="dislikeCount">0</span> disliked · 
+        <span id="loveCount">0</span> loved
+      </div>
+    </section>
+    
+    <script>
+      const postId = window.location.pathname.split('/').pop();
+      const storageKey = 'blindpov_reactions_' + postId;
+      
+      function react(type) {
+        let votes = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        votes[type] = (votes[type] || 0) + 1;
+        localStorage.setItem(storageKey, JSON.stringify(votes));
+        updateCounts(votes);
+      }
+      
+      function updateCounts(votes) {
+        document.getElementById('likeCount').textContent = votes.like || 0;
+        document.getElementById('dislikeCount').textContent = votes.dislike || 0;
+        document.getElementById('loveCount').textContent = votes.love || 0;
+      }
+      
+      // Load existing counts
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      updateCounts(saved);
+    </script>
+    
   </main>
 
   <footer>
