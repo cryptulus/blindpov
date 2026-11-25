@@ -89,6 +89,31 @@ nav a:hover, nav a:focus {
   list-style: none;
 }
 
+.post-list .sort-toggle {
+  display: inline-block;
+  background: var(--border);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.post-list .sort-toggle:hover,
+.post-list .sort-toggle:focus {
+  background: var(--accent-dark);
+  color: var(--heading);
+  border-color: var(--accent-dark);
+}
+
+.post-list .sort-toggle:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .post-list li {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -122,25 +147,18 @@ nav a:hover, nav a:focus {
   color: var(--fg);
 }
 
-.post-list .post-tags {
-  margin-top: 10px;
-}
-
-.post-list .post-tags a {
-  display: inline-block;
-  background: var(--border);
-  color: var(--text-muted);
-  padding: 3px 10px;
-  border-radius: 15px;
-  font-size: 0.8em;
-  margin-right: 5px;
-  margin-top: 5px;
-}
-
-.post-list .post-tags a:hover,
-.post-list .post-tags a:focus {
-  background: var(--accent-dark);
-  color: var(--heading);
+/* Tags hidden from view but kept in DOM for SEO */
+.post-list .post-tags,
+.post .post-tags {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Single post */

@@ -23,33 +23,12 @@
   </nav>
 
   <main id="main-content">
-    <h2>Recent Posts</h2>
-    <ul class="post-list" role="list">
-      <!-- Posts will be listed here -->
-      <li>
-        <h2><a href="posts/post3-migraine-zen.html">Migraine Zen: An Accessible App for Tracking Headaches and Migraines</a></h2>
-        <p class="post-date">June 25, 2026</p>
-        <p class="post-excerpt">A review of Migraine Zen, a VoiceOver-compatible app for tracking headaches and migraines on iPhone.</p>
-        <div class="post-tags">
-          <a href="posts/post3-migraine-zen.html">migraine</a>
-          <a href="posts/post3-migraine-zen.html">accessibility</a>
-          <a href="posts/post3-migraine-zen.html">VoiceOver</a>
-          <a href="posts/post3-migraine-zen.html">iPhone</a>
-          <a href="posts/post3-migraine-zen.html">app review</a>
-          <a href="posts/post3-migraine-zen.html">health</a>
-        </div>
-      </li>
-      <li>
-        <h2><a href="posts/post2-rubiks-cube.html">Accessible Rubik's Cubes for Blind Solvers</a></h2>
-        <p class="post-date">November 14, 2026</p>
-        <p class="post-excerpt">A deep dive into tactile Rubik's Cubes, speed cubes, and the new Texture Cube for blind puzzle solvers.</p>
-        <div class="post-tags">
-          <a href="posts/post2-rubiks-cube.html">accessibility</a>
-          <a href="posts/post2-rubiks-cube.html">blind</a>
-          <a href="posts/post2-rubiks-cube.html">puzzles</a>
-          <a href="posts/post2-rubiks-cube.html">games</a>
-        </div>
-      </li>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2>Posts</h2>
+      <button class="sort-toggle" id="sortToggle" aria-pressed="false" onclick="toggleSort()">Newest first</button>
+    </div>
+    <ul class="post-list" role="list" id="postList">
+      <!-- Oldest first by default -->
       <li>
         <h2><a href="posts/post1-introduction.html">Introduction to Blind POV</a></h2>
         <p class="post-date">November 13, 2026</p>
@@ -64,11 +43,69 @@
           <a href="posts/post1-introduction.html">trends</a>
         </div>
       </li>
+      <li>
+        <h2><a href="posts/post2-rubiks-cube.html">Accessible Rubik's Cubes for Blind Solvers</a></h2>
+        <p class="post-date">November 14, 2026</p>
+        <p class="post-excerpt">A deep dive into tactile Rubik's Cubes, speed cubes, and the new Texture Cube for blind puzzle solvers.</p>
+        <div class="post-tags">
+          <a href="posts/post2-rubiks-cube.html">accessibility</a>
+          <a href="posts/post2-rubiks-cube.html">blind</a>
+          <a href="posts/post2-rubiks-cube.html">puzzles</a>
+          <a href="posts/post2-rubiks-cube.html">games</a>
+        </div>
+      </li>
+      <li>
+        <h2><a href="posts/post3-migraine-zen.html">Migraine Zen: An Accessible App for Tracking Headaches and Migraines</a></h2>
+        <p class="post-date">June 25, 2026</p>
+        <p class="post-excerpt">A review of Migraine Zen, a VoiceOver-compatible app for tracking headaches and migraines on iPhone.</p>
+        <div class="post-tags">
+          <a href="posts/post3-migraine-zen.html">migraine</a>
+          <a href="posts/post3-migraine-zen.html">accessibility</a>
+          <a href="posts/post3-migraine-zen.html">VoiceOver</a>
+          <a href="posts/post3-migraine-zen.html">iPhone</a>
+          <a href="posts/post3-migraine-zen.html">app review</a>
+          <a href="posts/post3-migraine-zen.html">health</a>
+        </div>
+      </li>
     </ul>
   </main>
 
   <footer>
     <p>&copy; 2026 Greg Osborne / BlindPOV. All rights reserved.</p>
   </footer>
+
+  <script>
+    let newestFirst = false;
+    const postList = document.getElementById('postList');
+    const sortToggle = document.getElementById('sortToggle');
+
+    function toggleSort() {
+      newestFirst = !newestFirst;
+      sortToggle.setAttribute('aria-pressed', newestFirst.toString());
+      sortToggle.textContent = newestFirst ? 'Oldest first' : 'Newest first';
+
+      const items = Array.from(postList.querySelectorAll('li'));
+      items.sort((a, b) => {
+        const dateA = getDate(a);
+        const dateB = getDate(b);
+        return newestFirst ? dateB - dateA : dateA - dateB;
+      });
+      items.forEach(item => postList.appendChild(item));
+    }
+
+    function getDate(li) {
+      const dateStr = li.querySelector('.post-date').textContent.trim();
+      const months = {
+        'January': 0, 'February': 1, 'March': 2, 'April': 3,
+        'May': 4, 'June': 5, 'July': 6, 'August': 7,
+        'September': 8, 'October': 9, 'November': 10, 'December': 11
+      };
+      const parts = dateStr.split(' ');
+      const month = months[parts[0]];
+      const day = parseInt(parts[1].replace(',', ''), 10);
+      const year = parseInt(parts[2], 10);
+      return new Date(year, month, day).getTime();
+    }
+  </script>
 </body>
 </html>
